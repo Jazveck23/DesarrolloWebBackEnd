@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,8 +20,13 @@ import com.microservice.cellphones.entity.Cellphone;
 import com.microservice.cellphones.services.CellphoneService;
 
 
+
 @RestController
 public class CellphoneController {
+	
+	@Autowired
+	private Environment env;
+	
 	@Autowired
 	private CellphoneService service;
 	
@@ -30,13 +36,22 @@ public class CellphoneController {
 	@GetMapping("/list")//ruta de acceso a la lista o los registros de la tabla
 	public List<Cellphone> list(){
 		return service.findAll().stream().map(cel -> {
-			cel.setPort(port);
+			cel.setPort(Integer.parseInt(env.getProperty("local.server.port")));
 			return cel;
 		}).collect(Collectors.toList());	//retorno listado de celular y no el iterable
 	}
 	
 	@GetMapping("/cellphone/{id}")
 	public Cellphone detail(@PathVariable Long id) {
+		
+		try {
+			Thread.sleep(2000L);
+			
+		}catch(InterruptedException e) {
+			
+			e.printStackTrace();
+			
+		}
 		return service.findById(id);	
 	}
 	

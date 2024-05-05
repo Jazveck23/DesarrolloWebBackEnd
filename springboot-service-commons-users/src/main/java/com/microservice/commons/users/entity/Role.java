@@ -1,4 +1,4 @@
-package com.microservice.users.entity;
+package com.microservice.commons.users.entity;
 
 import java.io.Serializable;
 

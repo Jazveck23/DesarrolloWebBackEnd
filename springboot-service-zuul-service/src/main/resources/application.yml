@@ -22,12 +22,21 @@ zuul:
    service-id: service-cellphones
    path: /api/phone/**
    
+  users:
+   service-id: service-commons-users
+   path: /api/us/**
+   
+  oauth:
+   service-id: service-oauth
+   path: /api/security/**
+   sensitive-headers: Cookie, Set-Cookie
+   
+  
 
-     
    
 ribbon:
- ConnectTimeout: 40000
- ReadTimeout: 40000
+ ConnectTimeout: 60000
+ ReadTimeout: 60000
 
 hystrix:
  command:
@@ -35,6 +44,6 @@ hystrix:
    execution:
     isolation:
      thread:
-      TimeoutInMiliseconds: 40000
+      TimeoutInMiliseconds: 60000
       
  

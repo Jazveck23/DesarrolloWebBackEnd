@@ -1,4 +1,4 @@
-package com.microservice.users.entity;
+package com.microservice.commons.users.entity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,7 +19,7 @@ import javax.persistence.ManyToMany;
 
 @Entity
 @Table(name="users")
-public class User implements Serializable{
+public class Usuario implements Serializable{
 	
 	
 	private static final long serialVersionUID = 8550556477721078417L;
